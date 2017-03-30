@@ -1,0 +1,17 @@
+sudo: required
+language: node_js
+node_js:
+- 7.8.0
+install:
+- npm install
+script:
+- bash ./bin/publish.sh
+notifications:
+  email:
+    recipients:
+    - bill@dehora.net
+    on_success: always
+    on_failure: always
+env:
+  global:
+    secure: AKSzSXbdgpX5o+L3rQpQFVNsZu2OXTA1BfehiL4usjzMuMxi0XHSapW/LEx8rp03GW55L62ZNgK8xIlJryOifqIK4TxjfVsTQl0/yqtFdIHtmaL4tmzm11dwr1vpAhnfvCkeOb6j6kbLouAKEi1ObYQ4n1b6Zpq228fm4zgNxxcFwTTN9xNaBszeBt2mMzY6Emx2v32kxO6aAvLtncqvwgyaPpz3xzRhdvBMUeA4FnNEc18+hXiFvUGEEHQT6qb3DWUNJpzHioF1QGo+12K4q3lBNi1Sm05Sy7IhZEqDhskVZfbTev9bvGv6zYijVE28fPn4qz1ZHES4GqGT177uULvWhTbNgVTZ7N9pbR/nkbYG8KvcSXoc3Z5yTpDJU/SvVxTzUPN3IWE5YbGk/o3EsIUao0LaXCw81Xw3MbKah7OHktW/RFzi61FflLeuXn0XmeD2nc3lpG+4V0p1agzWRlcWkODVPUHg8Mcx8fucHwMArmkIdHBZLodKR//hgBrEbvsLuDPu+ic+tYPveC5z+5e6+9Itp4idANQYfjVMHYdzjG9JSf9KUpxG6AQaTyWDDuwyLVJRM5dbfwkel+XLWKOBRP/H/QCS6ioRlvv4gX/1VVAFqMJ6c1vwYRIzhSDfcoSyVOh9f2Fm5lbm+7g2I9FNfbFKXTYoqW8L3NQeWBg=
