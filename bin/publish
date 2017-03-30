@@ -1,6 +1,9 @@
 #!/bin/bash
 set -o errexit -o nounset
 
+git config --global user.name "Travis CI"
+git config --global user.email "travis@travis-ci.org";
+
 echo "Running Github Pages Publish from `pwd`"
 
 SOURCE_BRANCH="master"
@@ -21,8 +24,6 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
 fi
 
 GITREV=$(git rev-parse --short HEAD)
-git config user.name "Travis CI"
-git config user.email "travis@travis-ci.org";
 
 echo "Publishing new pages from branch $TRAVIS_BRANCH rev ${GITREV}"
 
