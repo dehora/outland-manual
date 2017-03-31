@@ -1,0 +1,791 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Paths · Outland</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="definitions.html" />
+    
+    
+    <link rel="prev" href="overview.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="overview.html">
+            
+                <a href="overview.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.1" data-path="paths.html">
+            
+                <a href="paths.html">
+            
+                    
+                    Paths
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="definitions.html">
+            
+                <a href="definitions.html">
+            
+                    
+                    Definitions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Security
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Paths</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="api-resources">API Resources</h2>
+<h3 id="working-with-apps-grants-and-owners">Working with Apps, Grants, and Owners</h3>
+<ul>
+<li><a href="#post-apps">POST /apps</a></li>
+<li><a href="#get-appsappkey">GET /apps{appkey}</a></li>
+<li><a href="#post-appsappkeygrantsmembers">POST /apps/{appkey}/grants/members</a></li>
+<li><a href="#delete-appsappkeygrantsmembersmember_key_or_email%7D">DELETE /apps/{appkey}/grants/members/{member_key_or_email}</a></li>
+<li><a href="#post-appsappkeygrantsservices">POST /apps/{appkey}/grants/services</a></li>
+<li><a href="#delete-appsappkeygrantsservicesservice_key">DELETE /apps/{appkey}/grants/services/{service_key}</a></li>
+<li><a href="#post-appsappkeyowners">POST /apps/{appkey}/owners</a></li>
+<li><a href="#delete-appsappkeyownersowner_username_or_email">DELETE /apps/{appkey}/owners/{owner_username_or_email}</a></li>
+</ul>
+<h3 id="working-with-features">Working with Features</h3>
+<ul>
+<li><a href="#post-featuresappkey">POST /features/{appkey}</a></li>
+<li><a href="#get-featuresappkeyfeed">GET /features/{appkey}/feed</a></li>
+<li><a href="#post-featuresappkeyfeature_key">POST /features/{appkey}/{feature_key}</a></li>
+</ul>
+<p><a name="paths"></a></p>
+<h2 id="paths">Paths</h2>
+<p><a name="apps-post"></a></p>
+<h3 id="post-apps">POST /apps</h3>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Header</strong></td>
+<td><strong>Idempotency-Key</strong>  <br><em>optional</em></td>
+<td>Optional. Allows retrys with the same value to assure the request is processed once.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td><strong>app</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="definitions.html#appcreate">AppCreate</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>201</strong></td>
+<td>Created  <br><strong>Headers</strong> :   <br><code>Location</code> (string) : The location of the created App. Always an absolute URI.  <br><code>Idempotency-Key-Trace</code> (string) : Returned if the request is a duplicate based on the Idempotency-Key.</td>
+<td><a href="definitions.html#app">App</a></td>
+</tr>
+<tr>
+<td><strong>422</strong></td>
+<td>returned if the App is invalid</td>
+<td><a href="definitions.html#problem">Problem</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="apps-appkey-get"></a></p>
+<h3 id="get-appsappkey">GET /apps/{appkey}</h3>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok</td>
+<td><a href="definitions.html#app">App</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="apps-appkey-grants-members-post"></a></p>
+<h3 id="post-appsappkeygrantsmembers">POST /apps/{appkey}/grants/members</h3>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Header</strong></td>
+<td><strong>Idempotency-Key</strong>  <br><em>optional</em></td>
+<td>Optional. Allows retrys with the same value to assure the request is processed once.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td><strong>member</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="definitions.html#membergrantcreate">MemberGrantCreate</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok  <br><strong>Headers</strong> :   <br><code>Idempotency-Key-Trace</code> (string) : Returned if the request is a duplicate based on the Idempotency-Key.</td>
+<td><a href="definitions.html#app">App</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="apps-appkey-grants-members-member_key_or_email-delete"></a></p>
+<h3 id="delete-appsappkeygrantsmembersmemberkeyoremail">DELETE /apps/{appkey}/grants/members/{member_key_or_email}</h3>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>member_key_or_email</strong>  <br><em>required</em></td>
+<td>The member&apos;s email or key.</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok</td>
+<td><a href="definitions.html#app">App</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="apps-appkey-grants-services-post"></a></p>
+<h3 id="post-appsappkeygrantsservices">POST /apps/{appkey}/grants/services</h3>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Header</strong></td>
+<td><strong>Idempotency-Key</strong>  <br><em>optional</em></td>
+<td>Optional. Allows retrys with the same value to assure the request is processed once.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td><strong>service</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="definitions.html#servicegrantcreate">ServiceGrantCreate</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok  <br><strong>Headers</strong> :   <br><code>Idempotency-Key-Trace</code> (string) : Returned if the request is a duplicate based on the Idempotency-Key.</td>
+<td><a href="definitions.html#app">App</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="apps-appkey-grants-services-service_key-delete"></a></p>
+<h3 id="delete-appsappkeygrantsservicesservicekey">DELETE /apps/{appkey}/grants/services/{service_key}</h3>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>service_key</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok</td>
+<td><a href="definitions.html#app">App</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="apps-appkey-owners-post"></a></p>
+<h3 id="post-appsappkeyowners">POST /apps/{appkey}/owners</h3>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Header</strong></td>
+<td><strong>Idempotency-Key</strong>  <br><em>optional</em></td>
+<td>Optional. Allows retrys with the same value to assure the request is processed once.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td><strong>owner</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="definitions.html#ownercreate">OwnerCreate</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok  <br><strong>Headers</strong> :   <br><code>Idempotency-Key-Trace</code> (string) : Returned if the request is a duplicate based on the Idempotency-Key.</td>
+<td><a href="definitions.html#app">App</a></td>
+</tr>
+<tr>
+<td><strong>409</strong></td>
+<td>Returned if there would be no owners left after the delete</td>
+<td><a href="definitions.html#problem">Problem</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="apps-appkey-owners-owner_username_or_email-delete"></a></p>
+<h3 id="delete-appsappkeyownersownerusernameoremail">DELETE /apps/{appkey}/owners/{owner_username_or_email}</h3>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>owner_username_or_email</strong>  <br><em>required</em></td>
+<td>The owner&apos;s email or username.</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok</td>
+<td><a href="definitions.html#app">App</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="features-appkey-post"></a></p>
+<h3 id="post-featuresappkey">POST /features/{appkey}</h3>
+<h4 id="description">Description</h4>
+<p>Add a feature to the app.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Header</strong></td>
+<td><strong>Idempotency-Key</strong>  <br><em>optional</em></td>
+<td>Optional. Allows retrys with the same value to assure the request is processed once.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td><strong>feature</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="definitions.html#featurecreate">FeatureCreate</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok  <br><strong>Headers</strong> :   <br><code>Idempotency-Key-Trace</code> (string) : Returned if the request is a duplicate based on the Idempotency-Key.</td>
+<td><a href="definitions.html#feature">Feature</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="features-appkey-feed-get"></a></p>
+<h3 id="get-featuresappkeyfeed">GET /features/{appkey}/feed</h3>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Query</strong></td>
+<td><strong>since</strong>  <br><em>optional</em></td>
+<td>A UNIX timestamp stating the point to fetch changes from. Always treated as UTC.</td>
+<td>integer (int64)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok</td>
+<td><a href="definitions.html#featurecollection">FeatureCollection</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="features-appkey-feature_key-post"></a></p>
+<h3 id="post-featuresappkeyfeaturekey">POST /features/{appkey}/{feature_key}</h3>
+<h4 id="description">Description</h4>
+<p>Update a feature in the app.</p>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Header</strong></td>
+<td><strong>Idempotency-Key</strong>  <br><em>optional</em></td>
+<td>Optional. Allows retrys with the same value to assure the request is processed once.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Path</strong></td>
+<td><strong>feature_key</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>Body</strong></td>
+<td><strong>feature</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="definitions.html#featurecreate">FeatureCreate</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<table>
+<thead>
+<tr>
+<th>HTTP Code</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>Ok  <br><strong>Headers</strong> :   <br><code>Idempotency-Key-Trace</code> (string) : Returned if the request is a duplicate based on the Idempotency-Key.</td>
+<td><a href="definitions.html#feature">Feature</a></td>
+</tr>
+</tbody>
+</table>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="overview.html" class="navigation navigation-prev " aria-label="Previous page: API Reference">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="definitions.html" class="navigation navigation-next " aria-label="Next page: Definitions">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Paths","level":"1.2.1","depth":2,"next":{"title":"Definitions","level":"1.2.2","depth":2,"path":"api-spec-generated/definitions.md","ref":"api-spec-generated/definitions.md","articles":[]},"previous":{"title":"API Reference","level":"1.2","depth":1,"path":"api-spec-generated/overview.md","ref":"api-spec-generated/overview.md","articles":[{"title":"Paths","level":"1.2.1","depth":2,"path":"api-spec-generated/paths.md","ref":"api-spec-generated/paths.md","articles":[]},{"title":"Definitions","level":"1.2.2","depth":2,"path":"api-spec-generated/definitions.md","ref":"api-spec-generated/definitions.md","articles":[]},{"title":"Security","level":"1.2.3","depth":2,"path":"api-spec-generated/security.md","ref":"api-spec-generated/security.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["github","-search","-highlight","-sharing"],"root":"docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/dehora/outland"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Outland","gitbook":">=3.2.1"},"file":{"path":"api-spec-generated/paths.md","mtime":"2017-03-31T17:55:07.899Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-31T17:56:11.832Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

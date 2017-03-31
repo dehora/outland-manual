@@ -1,0 +1,957 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Definitions · Outland</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="security.html" />
+    
+    
+    <link rel="prev" href="paths.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="overview.html">
+            
+                <a href="overview.html">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="paths.html">
+            
+                <a href="paths.html">
+            
+                    
+                    Paths
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="definitions.html">
+            
+                <a href="definitions.html">
+            
+                    
+                    Definitions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="security.html">
+            
+                <a href="security.html">
+            
+                    
+                    Security
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Definitions</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="objects">Objects</h2>
+<ul>
+<li><a href="#app">App</a></li>
+<li><a href="#appcreate">AppCreate</a></li>
+<li><a href="#feature">Feature</a></li>
+<li><a href="#featurecollection">FeatureCollection</a></li>
+<li><a href="#featurecreate">FeatureCreate</a></li>
+<li><a href="#featureoption">FeatureOption</a></li>
+<li><a href="#featureversion">FeatureVersion</a></li>
+<li><a href="#grantcollection">GrantCollection</a></li>
+<li><a href="#membergrant">MemberGrant</a></li>
+<li><a href="#membergrantcreate">MemberGrantCreate</a></li>
+<li><a href="#owner">Owner</a></li>
+<li><a href="#ownercreate">OwnerCreate</a></li>
+<li><a href="#servicegrant">ServiceGrant</a></li>
+<li><a href="#servicegrantcreate">ServiceGrantCreate</a></li>
+<li><a href="#problem">Problem</a></li>
+</ul>
+<p><a name="definitions"></a></p>
+<h2 id="definitions">Definitions</h2>
+<p><a name="app"></a></p>
+<h3 id="app">App</h3>
+<p>An app houses a collection of features and who is granted access to them.</p>
+<p>This representation corresponds the following protocol buffer:</p>
+<pre><code>  message App {
+    string type = 8;
+    string id = 1;
+    string key = 2;
+    string name = 3;
+    string created = 6;
+    string updated = 7;
+    repeated Owner owners = 5;
+    GrantCollection granted = 9;
+  }
+</code></pre><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>created</strong>  <br><em>required</em></td>
+<td>The server assigned create time.</td>
+<td>string (date-time)</td>
+</tr>
+<tr>
+<td><strong>granted</strong>  <br><em>required</em></td>
+<td>Which authenticated services and users are allowed to access the App&apos;s features. See<br>GrantCollection for more details.</td>
+<td><a href="definitions.html#grantcollection">GrantCollection</a></td>
+</tr>
+<tr>
+<td><strong>id</strong>  <br><em>required</em></td>
+<td>The server&apos;s unique identifier for an App. However, clients typically use the key<br>to interact with an App.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>key</strong>  <br><em>required</em></td>
+<td>A client defined key for the App. Note that even though every App is given a unqiue<br>id, two Apps can&apos;t have the same key as the key is the idiomatic way owners access and<br>call Apps.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>name</strong>  <br><em>required</em></td>
+<td>The name of the App.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>owners</strong>  <br><em>required</em></td>
+<td>The owners of the App. Note the server tries to ensure every App has at least one owner.</td>
+<td>&lt; <a href="definitions.html#owner">Owner</a> &gt; array</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>updated</strong>  <br><em>required</em></td>
+<td>The server assigned update time.</td>
+<td>string (date-time)</td>
+</tr>
+</tbody>
+</table>
+<p><a name="appcreate"></a></p>
+<h3 id="appcreate">AppCreate</h3>
+<p>An abbreviated form of App documenting the client defined fields to send.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>granted</strong>  <br><em>optional</em></td>
+<td><a href="definitions.html#grantcollection">GrantCollection</a></td>
+</tr>
+<tr>
+<td><strong>key</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>name</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>owners</strong>  <br><em>required</em></td>
+<td>&lt; <a href="definitions.html#owner">Owner</a> &gt; array</td>
+</tr>
+</tbody>
+</table>
+<p><a name="feature"></a></p>
+<h3 id="feature">Feature</h3>
+<p>A feature.
+This representation corresponds the following protocol buffer:</p>
+<pre><code>  message Feature {
+      string id = 1;
+      string key = 2;
+      string appkey = 3;
+      enum State {
+          none = 0;
+          off = 1;
+          on = 2;
+      }
+      State state = 4;
+      string description = 5;
+      string created = 6;
+      string updated = 7;
+      Owner owner = 8;
+      map&lt;string, string&gt; properties = 9;
+      OptionType option = 10;
+      repeated FeatureOption options = 11;
+      FeatureVersion version = 12;
+      string type = 13;
+  }
+</code></pre><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td>The App&apos;s key identifier. Features cannot have their app key changed once created.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>created</strong>  <br><em>required</em></td>
+<td>The server assigned create time.</td>
+<td>string (date-time)</td>
+</tr>
+<tr>
+<td><strong>description</strong>  <br><em>required</em></td>
+<td>A description for the field. The server may choose to strip, escape or reject any<br>embedded markup.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>id</strong>  <br><em>required</em></td>
+<td>The server assigned id for the feature. Clients can use the key directly for identity.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>key</strong>  <br><em>required</em></td>
+<td>The client assigned key for the feature. This must be unique for a given App. Features<br>cannot have their keys changed once created.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>option</strong>  <br><em>required</em></td>
+<td>The kind of feature. These are the known values currently:<br><br>  - &quot;flag&quot;: indicates a vanilla feature flag that has no follow on options, just state.<br>  - &quot;bool&quot;: indicates a feature flag that has two fixed options, &quot;true&quot; and &quot;false&quot;.<br>  - &quot;string&quot;: indicates a feature flag that has n string valued options.<br>  - &quot;long&quot;: indicates a feature flag that has n long valued (format int64) options.<br>  - &quot;double&quot;: indicates a feature flag that has n double valued (format double) options.<br><br>This set may be extended in the future and should not be represented as a closed enum.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>options</strong>  <br><em>required</em></td>
+<td>The list of options for this feature. Note a &quot;flag&quot; option will have an empty array.</td>
+<td>&lt; <a href="definitions.html#featureoption">FeatureOption</a> &gt; array</td>
+</tr>
+<tr>
+<td><strong>owner</strong>  <br><em>required</em></td>
+<td>The owner of the feature, useful for getting in touch.</td>
+<td><a href="definitions.html#owner">Owner</a></td>
+</tr>
+<tr>
+<td><strong>properties</strong>  <br><em>required</em></td>
+<td>Client defined properties. The server may choose to strip, escape or reject any<br>embedded markup found in the names or values.</td>
+<td><a href="definitions.html#featureproperties">FeatureProperties</a></td>
+</tr>
+<tr>
+<td><strong>state</strong>  <br><em>required</em></td>
+<td>The feature state. The enumeration is closed by design, but clients may treat unknown<br>states as being the &apos;off&apos; type.<br><br>Features cannot be created with a starting state of on, they always start in the none<br>state (operationally none is treated the same as off) but none is used to indicate the<br>initial starting state. This means to turn on a feature, the client must send a subsequent<br>request. Clients may then change the feature state to on or off as needed, but can not<br>change the state back to none.</td>
+<td>enum (on, off, none)</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>updated</strong>  <br><em>required</em></td>
+<td>The server assigned update time.</td>
+<td>string (date-time)</td>
+</tr>
+<tr>
+<td><strong>version</strong>  <br><em>required</em></td>
+<td>The version of the feature. This is updated each time the feature is changed.</td>
+<td><a href="definitions.html#featureversion">FeatureVersion</a></td>
+</tr>
+</tbody>
+</table>
+<p><a name="featurecollection"></a></p>
+<h3 id="featurecollection">FeatureCollection</h3>
+<p>A collection of features belonging to an App.
+This representation corresponds the following protocol buffer:</p>
+<pre><code>  message FeatureCollection {
+      string type = 1;
+      string appkey = 2;
+      repeated Feature items = 3;
+  }
+</code></pre><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>items</strong>  <br><em>required</em></td>
+<td>&lt; <a href="definitions.html#feature">Feature</a> &gt; array</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="featurecreate"></a></p>
+<h3 id="featurecreate">FeatureCreate</h3>
+<p>An abbreviated form of Feature documenting the client defined fields to send.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>appkey</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>description</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>key</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>option</strong>  <br><em>required</em></td>
+<td>The kind of feature. These are the known values currently:<br><br>  - &quot;flag&quot;: indicates a vanilla feature flag that has no follow on options, just state.<br>  - &quot;bool&quot;: indicates a feature flag that has two fixed options, &quot;true&quot; and &quot;false&quot;.<br>  - &quot;string&quot;: indicates a feature flag that has n string valued options.<br>  - &quot;long&quot;: indicates a feature flag that has n long valued (format int64) options.<br>  - &quot;double&quot;: indicates a feature flag that has n double valued (format double) options.<br><br>This set may be extended in the future and should not be represented as a closed enum.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>options</strong>  <br><em>required</em></td>
+<td>The list of options for this feature. Note a &quot;flag&quot; option will have an empty array.</td>
+<td>&lt; <a href="definitions.html#featureoption">FeatureOption</a> &gt; array</td>
+</tr>
+<tr>
+<td><strong>owner</strong>  <br><em>required</em></td>
+<td></td>
+<td><a href="definitions.html#owner">Owner</a></td>
+</tr>
+<tr>
+<td><strong>properties</strong>  <br><em>optional</em></td>
+<td></td>
+<td><a href="definitions.html#featureproperties">FeatureProperties</a></td>
+</tr>
+<tr>
+<td><strong>state</strong>  <br><em>required</em></td>
+<td>The feature state. The enumaration is closed by design, but clients may treat unknown<br>states as being the &apos;none&apos; type.</td>
+<td>enum (on, off, none)</td>
+</tr>
+</tbody>
+</table>
+<p><a name="featureoption"></a></p>
+<h3 id="featureoption">FeatureOption</h3>
+<p>Indicates an option type of the feature.
+This representation corresponds the following protocol buffer:</p>
+<pre><code>  message FeatureOption {
+      string id = 1;
+      OptionType option = 2;
+      string name = 3;
+      string value = 4;
+      int32 weight = 5;
+      string type = 6;
+  }
+</code></pre><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>id</strong>  <br><em>required</em></td>
+<td>The server assigned id for the feature option. Clients please note:<br><br>  - the id is not required when creating a feature; if sent it will be replaced<br>  - the id must be sent thereafter when adjusting the weights</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>name</strong>  <br><em>required</em></td>
+<td>The name of the option. Note that for a bool option this must be either &quot;true&quot; or<br>&quot;false&quot;. Other values cause a 422 response.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>option</strong>  <br><em>required</em></td>
+<td>The kind of feature. These are the known values currently:<br><br>  - &quot;flag&quot;: indicates a vanilla feature flag that has no follow on options, just state.<br>  - &quot;bool&quot;: indicates a feature flag that has two fixed options, &quot;true&quot; and &quot;false&quot;.<br>  - &quot;string&quot;: indicates a feature flag that has n string valued options.<br>  - &quot;long&quot;: indicates a feature flag that has n long valued (format int64) options.<br>  - &quot;double&quot;: indicates a feature flag that has n double valued (format double) options.<br><br>This set may be extended in the future and should not be represented as a closed enum.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>value</strong>  <br><em>required</em></td>
+<td>The value of the feature. Clients may parse the string value as follows based on the<br>kind of option:<br><br>  - &quot;bool&quot;: the literal value is one of &quot;true&quot; or &quot;false&quot; (OAI format boolean)<br>  - &quot;string&quot;: the literal value is a string<br>  - &quot;long&quot;: the literal value may be treated as an int64 signed long (OAI format int64)<br>  - &quot;double&quot;: the literal value may be treated as a double  (OAI format double)<br><br>This set may be extended in the future and should not be represented as a closed enum.<br><br>Note that for a bool option this must be either &quot;true&quot; or &quot;false&quot;. Other values<br>cause a 422 response. This value must correspond to the value of the name field. If<br>it doesn&apos;t that will cause a 422 response.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>weight</strong>  <br><em>required</em></td>
+<td>A number between 0 and 1000. Larger or smaller numbers will cause a 422 response. The<br>total sum of the weights across all options for a feature must equal 10000; if they<br>don&apos;t the  response will be a 422.</td>
+<td>integer (int32)</td>
+</tr>
+</tbody>
+</table>
+<p><a name="featureproperties"></a></p>
+<h3 id="featureproperties">FeatureProperties</h3>
+<p><em>Type</em> : &lt; string, string &gt; map</p>
+<p><a name="featureversion"></a></p>
+<h3 id="featureversion">FeatureVersion</h3>
+<p>Indicates the version of the feature. Versions are structured objects instead of strings
+or numeric values as this allows them to be used in a fully distributed setting. In
+other words, this API does not assume it is the only source of versions.</p>
+<p>Versions are based on Hybrid Logical Clocks, which use a physical timestamp component
+along with a logical counter. See &quot;Logical Physical Clocks and Consistent Snapshots
+in Globally Distributed Databases&quot; by Kulkarni et al,
+<a href="https://www.cse.buffalo.edu/tech-reports/2014-04.pdf" target="_blank">https://www.cse.buffalo.edu/tech-reports/2014-04.pdf</a>, for more details on the model.</p>
+<p>As a convenience an id string value is also sent with the timestamp and counter and
+represents the same version information. The id value is lexically comparable for
+version order - ids are based ULIDs with the difference that they are always lowercase.
+See <a href="https://github.com/alizain/ulid" target="_blank">https://github.com/alizain/ulid</a> for more details on ULIDs.</p>
+<p>This representation corresponds the following protocol buffer:</p>
+<pre><code>  message FeatureVersion {
+      string id = 1;
+      int64 timestamp = 2;
+      int64 counter = 3;
+      string type = 4;
+  }
+</code></pre><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>counter</strong>  <br><em>required</em></td>
+<td>The logical counter for the version</td>
+<td>integer (int32)</td>
+</tr>
+<tr>
+<td><strong>id</strong>  <br><em>required</em></td>
+<td>The physical timestamp for the version  <br><strong>Pattern</strong> : <code>&quot;ver_[0-9abcdefghjkmnopqrstuvwxyz]{26}&quot;</code></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>timestamp</strong>  <br><em>required</em></td>
+<td>The physical timestamp for the version</td>
+<td>integer (int64)</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="grantcollection"></a></p>
+<h3 id="grantcollection">GrantCollection</h3>
+<p>A collection of member and service grants for an app.
+This representation corresponds the following protocol buffer:</p>
+<pre><code>  message GrantCollection {
+      string type = 1;
+      repeated ServiceGrant services = 10;
+      repeated MemberGrant members = 11;
+  }
+</code></pre><p>Services are typically just that, services or some runtime component of a system. Members
+typically represent people such as an employee or team member, but a member can also be a
+group or a team.</p>
+<p>When making requests to see features, the service or member must present their credentials
+and be authenticated against the server (for example via an OAuth Bearer token). Once they
+are authenticated they are checked to see if they have a grant entry for the App. If they
+do, the request is honored. If they don&apos;t the request is rejected.</p>
+<p>The reason to support both services and members is that it&apos;s common for individuals to
+want to work with features during development and for companies to issue tokens to
+servcies and people separately. Allowng &quot;people&quot; grants avoids the need to do things like
+create fake services for individuals. Also, operationally Outland supports the notion
+of individuals examining features for operational or other reasons.</p>
+<p>Grants are best thought of as a basic grouping mechanism to allow owners a level
+of control over which services and people can access which features. This lets the server
+provide a basic level of multitenancy. Grants do not provide strong security by themselves</p>
+<ul>
+<li>that will be acheived via the mechanisms you use to issue tokens and credentials to users
+and systems to authenticate the named grantees, which is outside the scope of the Outland
+API and project.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>members</strong>  <br><em>required</em></td>
+<td>The list of members who can use this app&apos;s features</td>
+<td>&lt; <a href="definitions.html#membergrant">MemberGrant</a> &gt; array</td>
+</tr>
+<tr>
+<td><strong>services</strong>  <br><em>required</em></td>
+<td>The list of services who can use this app&apos;s features</td>
+<td>&lt; <a href="definitions.html#servicegrant">ServiceGrant</a> &gt; array</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="membergrant"></a></p>
+<h3 id="membergrant">MemberGrant</h3>
+<p>A member (person or team) that is allowed to access an App&apos;s features..
+This representation corresponds the following protocol buffer:</p>
+<pre><code>  message MemberGrant {
+      string type = 1;
+      string id = 2;
+      string name = 10;
+      string username = 11;
+      string email = 12;
+  }
+</code></pre><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>email</strong>  <br><em>required</em></td>
+<td>The email of the person or team</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>id</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>name</strong>  <br><em>required</em></td>
+<td>A name for the member.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>username</strong>  <br><em>required</em></td>
+<td>The username of the person or team</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="membergrantcreate"></a></p>
+<h3 id="membergrantcreate">MemberGrantCreate</h3>
+<p>An abbreviated form of MemberGrant documenting the client defined fields to send.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>email</strong>  <br><em>required</em></td>
+<td>The email of the person or team</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>name</strong>  <br><em>required</em></td>
+<td>A name for the member.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>username</strong>  <br><em>required</em></td>
+<td>The username of the person or team</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="owner"></a></p>
+<h3 id="owner">Owner</h3>
+<p>An owner is the responsible contact for a feature or app.
+This representation corresponds the following protocol buffer:</p>
+<pre><code>  message Owner {
+      string id = 1;
+      string name = 2;
+      string username = 3;
+      string email = 4;
+      string type = 7;
+  }
+</code></pre><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>email</strong>  <br><em>required</em></td>
+<td>The email of the owner or team.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>id</strong>  <br><em>required</em></td>
+<td>The server&apos;s unique identifier for an Owner. Owners are currently unique per App and<br> not neccessarily globally unique.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>name</strong>  <br><em>required</em></td>
+<td>A name for the owner.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>username</strong>  <br><em>required</em></td>
+<td>The username of the owner or team.</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="ownercreate"></a></p>
+<h3 id="ownercreate">OwnerCreate</h3>
+<p>An abbreviated form of Owner documenting the client defined fields to send.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>email</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>name</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>username</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="problem"></a></p>
+<h3 id="problem">Problem</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>detail</strong>  <br><em>optional</em></td>
+<td>A human readable explanation of the problem.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>instance</strong>  <br><em>optional</em></td>
+<td>An absolute URI that identifies the specific occurrence of the problem.</td>
+<td>string (uri)</td>
+</tr>
+<tr>
+<td><strong>status</strong>  <br><em>required</em></td>
+<td>The HTTP status code returned with this problem.</td>
+<td>integer (int32)</td>
+</tr>
+<tr>
+<td><strong>title</strong>  <br><em>required</em></td>
+<td>A short, summary of the problem type.</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td>A URI that identifies the problem type.</td>
+<td>string (uri)</td>
+</tr>
+</tbody>
+</table>
+<p><a name="servicegrant"></a></p>
+<h3 id="servicegrant">ServiceGrant</h3>
+<p>A service that is allowed to access an App&apos;s features..
+This representation corresponds the following protocol buffer:</p>
+<pre><code>  message ServiceGrant {
+      string type = 1;
+      string id = 2;
+      string name = 10;
+      string key = 11;
+  }
+</code></pre><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>id</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>key</strong>  <br><em>required</em></td>
+<td>A key identifiying the service</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>name</strong>  <br><em>required</em></td>
+<td>A name for the service</td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>type</strong>  <br><em>required</em></td>
+<td></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><a name="servicegrantcreate"></a></p>
+<h3 id="servicegrantcreate">ServiceGrantCreate</h3>
+<p>An abbreviated form of ServiceGrant documenting the client defined fields to send.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>key</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+<tr>
+<td><strong>name</strong>  <br><em>required</em></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="paths.html" class="navigation navigation-prev " aria-label="Previous page: Paths">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="security.html" class="navigation navigation-next " aria-label="Next page: Security">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Definitions","level":"1.2.2","depth":2,"next":{"title":"Security","level":"1.2.3","depth":2,"path":"api-spec-generated/security.md","ref":"api-spec-generated/security.md","articles":[]},"previous":{"title":"Paths","level":"1.2.1","depth":2,"path":"api-spec-generated/paths.md","ref":"api-spec-generated/paths.md","articles":[]},"dir":"ltr"},"config":{"plugins":["github","-search","-highlight","-sharing"],"root":"docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/dehora/outland"},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Outland","gitbook":">=3.2.1"},"file":{"path":"api-spec-generated/definitions.md","mtime":"2017-03-31T17:55:07.899Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-31T17:56:11.832Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
